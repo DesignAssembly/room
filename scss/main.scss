@@ -119,18 +119,48 @@ header {
     z-index: 5;
     display: flex;
     align-items: center;
+    padding: 3rem 0;
+    display: flex;
+    justify-content: center;
 
     @include respondto('medium') {
         padding: 52px 64px;
     }
 
     .logo {
-        margin-right: 40px;
+        
         width: 67px;
+        @include respondto('medium') {
+            margin-right: 40px;
+        }
+        
     }
 }
 
 // Navigation
+
+.mobile__trigger {
+
+    position: absolute;
+    top: 3rem;
+    left: 1.5rem;
+    
+    @include respondto('medium') {
+        display: none;
+    }
+}
+
+.mobile__close {
+
+    position: absolute;
+    top: 3rem;
+    left: 1.5rem;
+    z-index: 6;
+    
+    @include respondto('medium') {
+        display: none;
+    }
+}
 
 nav {
     position: fixed;
@@ -148,9 +178,21 @@ nav {
         height: 100%;
         width: 100%;
         z-index: 3;
+        opacity: 0;
+        transition: all .3s ease-out;
+        pointer-events: none;
+
+        &.active {
+           opacity: 1;
+           pointer-events: painted;
+        }
 
         @include respondto('medium') {
             display: none;
+
+            &.active {
+                display: none;
+            }
         }
     }
 }
@@ -162,16 +204,24 @@ nav {
     position: relative;
     width: 100%;
     display: flex;
+    display: none;
+    padding-left: 4rem;
+
+    &.active {
+        display: flex;
+    }
 
     @include respondto(medium) {
         display: flex;
         background: transparent ;
+        padding-left: 0;
     }
 
     &__link {
         position: relative;
         padding: 3rem 1rem;
         display: flex;
+        color: var(--clr-black);
 
         @include respondto(medium) {
             color: var(--clr-white);
@@ -234,9 +284,11 @@ nav {
 
     &--right {
         position: relative;
+        height: 412px;
         
         @include respondto(large) {
             flex: 1;
+            height: auto;
         }
     }
 
@@ -267,6 +319,7 @@ nav {
     background-repeat: no-repeat;
     background-position: top center;
     opacity: 0;
+    transition: opacity .5s ease-in-out;
 
     &.active {
         opacity: 1;
@@ -279,8 +332,8 @@ nav {
     &--1 {
         background: url(../images/mobile-image-hero-1.jpg);
         background-size: cover;
-            background-repeat: no-repeat;
-            background-position: top center;
+        background-repeat: no-repeat;
+        background-position: top center;
 
         @include respondto('medium') {
             background: url(../images/desktop-image-hero-1.jpg);
@@ -292,8 +345,15 @@ nav {
 
     &--2 {
         background: url(../images/mobile-image-hero-2.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top center;
+
         @include respondto('medium') {
             background: url(../images/desktop-image-hero-2.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
         }
     }
 
@@ -314,14 +374,28 @@ nav {
 // slider content
 
 .slide__info {
-    display: none;
+    position: absolute;
+   
+    transition: all .3s ease-in-out;
+    
 
     &.active {
-        display: flex;
+       
+        .content {
+            transform: translateX(0);
+            opacity: 1;
+            
+        }
+        
     }
 
     .content {
         padding: 4.375rem 1.875rem;
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all .4s ease-out;
+        transition-delay:400ms;
+     
 
         @include respondto('medium') {
             padding: 5.8rem;

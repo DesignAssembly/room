@@ -97,6 +97,11 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 3rem 0;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 @media only screen and (min-width: 768px) {
@@ -106,8 +111,38 @@ header {
 }
 
 header .logo {
-  margin-right: 40px;
   width: 67px;
+}
+
+@media only screen and (min-width: 768px) {
+  header .logo {
+    margin-right: 40px;
+  }
+}
+
+.mobile__trigger {
+  position: absolute;
+  top: 3rem;
+  left: 1.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .mobile__trigger {
+    display: none;
+  }
+}
+
+.mobile__close {
+  position: absolute;
+  top: 3rem;
+  left: 1.5rem;
+  z-index: 6;
+}
+
+@media only screen and (min-width: 768px) {
+  .mobile__close {
+    display: none;
+  }
 }
 
 nav {
@@ -129,10 +164,22 @@ nav .mobile__overlay {
   height: 100%;
   width: 100%;
   z-index: 3;
+  opacity: 0;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  pointer-events: none;
+}
+
+nav .mobile__overlay.active {
+  opacity: 1;
+  pointer-events: painted;
 }
 
 @media only screen and (min-width: 768px) {
   nav .mobile__overlay {
+    display: none;
+  }
+  nav .mobile__overlay.active {
     display: none;
   }
 }
@@ -145,6 +192,14 @@ nav .mobile__overlay {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  display: none;
+  padding-left: 4rem;
+}
+
+.menu.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 @media only screen and (min-width: 768px) {
@@ -153,6 +208,7 @@ nav .mobile__overlay {
     display: -ms-flexbox;
     display: flex;
     background: transparent;
+    padding-left: 0;
   }
 }
 
@@ -162,6 +218,7 @@ nav .mobile__overlay {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  color: var(--clr-black);
 }
 
 @media only screen and (min-width: 768px) {
@@ -233,6 +290,7 @@ nav .mobile__overlay {
 
 .slider--right {
   position: relative;
+  height: 412px;
 }
 
 @media only screen and (min-width: 992px) {
@@ -240,6 +298,7 @@ nav .mobile__overlay {
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
+    height: auto;
   }
 }
 
@@ -273,6 +332,8 @@ nav .mobile__overlay {
   background-repeat: no-repeat;
   background-position: top center;
   opacity: 0;
+  -webkit-transition: opacity .5s ease-in-out;
+  transition: opacity .5s ease-in-out;
 }
 
 .slide__img.active {
@@ -303,11 +364,17 @@ nav .mobile__overlay {
 
 .slide__img--2 {
   background: url(../images/mobile-image-hero-2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
 }
 
 @media only screen and (min-width: 768px) {
   .slide__img--2 {
     background: url(../images/desktop-image-hero-2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
   }
 }
 
@@ -328,17 +395,26 @@ nav .mobile__overlay {
 }
 
 .slide__info {
-  display: none;
+  position: absolute;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
-.slide__info.active {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.slide__info.active .content {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  opacity: 1;
 }
 
 .slide__info .content {
   padding: 4.375rem 1.875rem;
+  opacity: 0;
+  -webkit-transform: translateX(50px);
+          transform: translateX(50px);
+  -webkit-transition: all .4s ease-out;
+  transition: all .4s ease-out;
+  -webkit-transition-delay: 400ms;
+          transition-delay: 400ms;
 }
 
 @media only screen and (min-width: 768px) {
